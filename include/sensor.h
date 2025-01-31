@@ -1,10 +1,7 @@
-#ifndef __SENSOR_H__
-#define __SENSOR_H__
+#include "commons.h"
 
-#define MAX_TEMP 90.0
+/* Random number seed */
+static uint32_t ulRandomSeed = 12345;
 
-#include <stdlib.h>
-
-float generateRandNumbers();
-
-#endif // __SENSOR_H__
+static int prvGenerateRandomNumber(int min, int max);
+void vRandomGenTask(void *pvParameters);
