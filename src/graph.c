@@ -5,12 +5,12 @@ void vGraphTask(void *pvParameters)
     int value;
     int xPos = GRAPH_X_OFFSET + 1;
     OSRAMClear();
-    for (;;)
+    while(1)
     {
         if (xQueueReceive(xFilteredValueQueue, &value, portMAX_DELAY) == pdPASS)
         {
             char buffer[10];
-            prvIntToString(value, buffer);
+            IntToStringGraph(value, buffer);
             OSRAMStringDraw(buffer, 8, 1);
             OSRAMStringDraw("t", 14, 0);
             unsigned char yAxis[] = {0xFF, 0xFF};
@@ -36,25 +36,22 @@ void vGraphTask(void *pvParameters)
     }
 }
 
-static void prvIntToString(int value, char *buffer)
+void IntToStringGraph(int num, char *str)
 {
-    char temp[10];
-    int i = 0, j = 0;
-    if (value == 0) {
-        buffer[j++] = '0';
-        buffer[j] = '\0';
-        return;
+    int i = 0;
+
+    if (num == 0)
+        str[i++] = '0';
+    else
+    {
+        while (num) 
+        {
+            str[i++] = num % 10 + '0';
+            num = num / 10;
+        }
     }
-    if (value < 0) {
-        buffer[j++] = '-';
-        value = -value;
-    }
-    while (value > 0) {
-        temp[i++] = '0' + (value % 10);
-        value /= 10;
-    }
-    while (i > 0) {
-        buffer[j++] = temp[--i];
-    }
-    buffer[j] = '\0';
+
+    str[i] = '\0';
+
+    vReverseStr(str, i);
 }

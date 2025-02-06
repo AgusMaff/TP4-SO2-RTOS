@@ -1,8 +1,9 @@
 #include "commons.h"
-/* Filter configuration */
-#define FILTER_WINDOW_SIZE     30 /* Number of samples for low-pass filter */
 
 extern QueueHandle_t xFilteredValueQueue;
 extern QueueHandle_t xSensorValueQueue;
 
+extern volatile int newFilterValue;
+
 void vLowPassFilterTask(void *pvParameters);
+void IntToString(int num, char *str);

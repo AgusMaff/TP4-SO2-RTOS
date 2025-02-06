@@ -9,7 +9,7 @@ static int prvGenerateRandomNumber(int min, int max)
 void vRandomGenTask(void *pvParameters)
 {
     int randomNumber;
-    for(;;)
+    while(1)
     {
         randomNumber = prvGenerateRandomNumber(TEMP_MIN, TEMP_MAX);
         xQueueSend(xSensorValueQueue, &randomNumber, portMAX_DELAY);

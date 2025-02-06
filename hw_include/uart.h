@@ -33,6 +33,8 @@ extern "C"
 {
 #endif
 
+#include "hw_types.h"
+
 //*****************************************************************************
 //
 // Values that can be passed to UARTIntEnable, UARTIntDisable, and UARTIntClear
